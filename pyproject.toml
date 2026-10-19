@@ -1,0 +1,40 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lk_markets"
+version = "0.2.0"
+description = "Sri Lankan markets data platform: CSE stocks, LKR exchange rates and crypto"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "dagster",
+    "dagster-webserver",
+    "dagster-dbt",
+    "dbt-core>=1.10",
+    "dbt-duckdb",
+    "duckdb",
+    "requests",
+    "python-dotenv",
+]
+
+[project.optional-dependencies]
+dev = ["pytest", "ruff"]
+
+[tool.setuptools]
+packages = ["lk_markets"]
+
+[tool.dagster]
+module_name = "lk_markets.definitions"
+code_location_name = "lk_markets"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.lint]
+select = ["F", "E", "W", "I", "UP", "B"]
+ignore = ["E501"]

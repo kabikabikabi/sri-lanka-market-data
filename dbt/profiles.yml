@@ -1,0 +1,8 @@
+lk_markets:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      # Same file the Python ingestion writes to (relative to this dbt folder).
+      path: "{{ env_var('LK_WAREHOUSE', '../data/warehouse.duckdb') }}"
+      threads: 1

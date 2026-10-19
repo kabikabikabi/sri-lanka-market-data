@@ -1,0 +1,17 @@
+version: 2
+
+sources:
+  - name: raw
+    description: Raw API responses saved by Dagster. Columns - key, fetched_at_utc, payload (JSON).
+    schema: raw
+    tables:
+      - name: cse_trade_summary
+        description: Today's trading for every CSE company (cse.lk tradeSummary). One row per company.
+      - name: cse_price_history
+        description: One year of daily prices per watchlist company (cse.lk companyChartDataByStock).
+      - name: fx_rates
+        description: Exchange rates per 1 USD from open.er-api.com.
+      - name: crypto_history
+        description: One year of daily crypto candles from Binance.
+      - name: crypto_quotes
+        description: Latest crypto prices from Finnhub.

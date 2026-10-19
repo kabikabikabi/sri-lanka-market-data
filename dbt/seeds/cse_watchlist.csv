@@ -1,0 +1,11 @@
+symbol,company_short_name,sector,is_jkh_group
+JKH.N0000,John Keells Holdings,Diversified,true
+CCS.N0000,Ceylon Cold Stores (Keells),Consumer & Retail,true
+COMB.N0000,Commercial Bank of Ceylon,Banks,false
+HNB.N0000,Hatton National Bank,Banks,false
+SAMP.N0000,Sampath Bank,Banks,false
+DIAL.N0000,Dialog Axiata,Telecom,false
+CTC.N0000,Ceylon Tobacco Company,Consumer & Retail,false
+LOLC.N0000,LOLC Holdings,Diversified,false
+HAYL.N0000,Hayleys,Diversified,false
+CARG.N0000,Cargills (Ceylon),Consumer & Retail,false

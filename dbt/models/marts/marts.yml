@@ -1,0 +1,44 @@
+version: 2
+
+models:
+  - name: fct_stock_prices
+    description: Daily closing price and % change per CSE company.
+    columns:
+      - name: symbol
+        data_tests: [not_null]
+      - name: trade_date
+        data_tests: [not_null]
+
+  - name: mart_watchlist_stats
+    description: 1-month and 1-year return and volatility per watchlist company.
+    columns:
+      - name: symbol
+        data_tests: [unique, not_null]
+
+  - name: fct_lkr_rates
+    description: LKR per 1 unit of each tracked currency, per day.
+    columns:
+      - name: lkr_per_unit
+        data_tests: [not_null]
+
+  - name: fct_crypto_lkr
+    description: Daily crypto prices in USDT and LKR.
+    columns:
+      - name: price_usdt
+        data_tests: [not_null]
+
+unit_tests:
+  - name: lkr_rate_maths_is_correct
+    description: 1 USD = 300 LKR and 1 USD = 0.8 GBP, so 1 GBP must be 375 LKR and 1 USD 300 LKR.
+    model: fct_lkr_rates
+    given:
+      - input: ref('stg_fx__rates')
+        rows:
+          - {rate_date: 2026-01-05, currency: LKR, per_usd: 300.0}
+          - {rate_date: 2026-01-05, currency: USD, per_usd: 1.0}
+          - {rate_date: 2026-01-05, currency: GBP, per_usd: 0.8}
+          - {rate_date: 2026-01-05, currency: ZAR, per_usd: 18.0}
+    expect:
+      rows:
+        - {rate_date: 2026-01-05, currency: USD, lkr_per_unit: 300.0}
+        - {rate_date: 2026-01-05, currency: GBP, lkr_per_unit: 375.0}
